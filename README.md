@@ -21,6 +21,8 @@ Apka jest we flutterku, na dole jest link do aktualnego APK, a bogacze niech se 
 
 # Duo
 Wyjaśnienia do odpowiedzi zostały wygenerowane przez AI. Nie traktować tego jako ground truth, ale raczej jako pomoc przy tworzeniu połączeń mózgowych, jak ktoś nic nie kuma.
+**Teraz wygenerowane z kontekstem wszystkich prezek [ważniaka](https://wazniak.mimuw.edu.pl/index.php?title=Bezpieczeństwo_systemów_komputerowych#Wykłady) i nowszym LLM'em**
+![image](/1M_context_window.png)
 
 Miłego klikania all i walenia bazuni!
 
