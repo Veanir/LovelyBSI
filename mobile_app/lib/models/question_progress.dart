@@ -6,6 +6,7 @@ class AttemptResult {
   final DateTime timestamp;
   final bool isPerfect;
   final double partialScore;
+  final bool isReview;
 
   AttemptResult({
     required this.correctSelections,
@@ -13,6 +14,7 @@ class AttemptResult {
     required this.timestamp,
     required this.isPerfect,
     required this.partialScore,
+    this.isReview = false,
   });
 
   factory AttemptResult.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class AttemptResult {
       timestamp: DateTime.parse(json['timestamp']),
       isPerfect: json['isPerfect'],
       partialScore: json['partialScore'].toDouble(),
+      isReview: json['isReview'] ?? false,
     );
   }
 
@@ -32,6 +35,7 @@ class AttemptResult {
       'timestamp': timestamp.toIso8601String(),
       'isPerfect': isPerfect,
       'partialScore': partialScore,
+      'isReview': isReview,
     };
   }
 }
@@ -93,16 +97,18 @@ class QuestionProgress {
       final attempt = attemptsList[i];
       final weight = (i + 1) / attemptsList.length; // More recent attempts have higher weight
       
-      weightedSum += attempt.partialScore * weight;
-      totalWeight += weight;
+      if (!attempt.isReview) {
+        weightedSum += attempt.partialScore * weight;
+        totalWeight += weight;
+      }
       
       if (attempt.isPerfect) _perfectAttempts++;
     }
 
-    _weightedSuccessRate = weightedSum / totalWeight;
+    _weightedSuccessRate = totalWeight > 0 ? weightedSum / totalWeight : 0.0;
   }
 
-  void updateProgress(Set<int> selectedAnswers, Set<int> actualCorrectAnswers) {
+  void updateProgress(Set<int> selectedAnswers, Set<int> actualCorrectAnswers, {bool isReview = false}) {
     final correctSelections = selectedAnswers.where(
       (i) => actualCorrectAnswers.contains(i)
     ).toSet();
@@ -127,6 +133,7 @@ class QuestionProgress {
       timestamp: DateTime.now(),
       isPerfect: isPerfect,
       partialScore: partialScore.clamp(0.0, 1.0),
+      isReview: isReview,
     );
 
     // Add attempt and maintain queue size

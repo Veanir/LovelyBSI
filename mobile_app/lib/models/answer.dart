@@ -7,7 +7,14 @@ class Answer {
   factory Answer.fromJson(Map<String, dynamic> json) {
     return Answer(
       text: json['text'],
-      isCorrect: json['isCorrect'],
+      isCorrect: json['isCorrect'] ?? false,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'text': text,
+      'isCorrect': isCorrect,
+    };
   }
 }

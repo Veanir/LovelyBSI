@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ExplanationDialog extends StatelessWidget {
-  final String? explanation;
-  final List<String>? keyTakeaways;
+  final String explanation;
 
   const ExplanationDialog({
     Key? key,
-    this.explanation,
-    this.keyTakeaways,
+    required this.explanation,
   }) : super(key: key);
 
   @override
@@ -19,26 +17,10 @@ class ExplanationDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (explanation != null && explanation!.isNotEmpty)
-              Text(
-                explanation!,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            if (keyTakeaways != null && keyTakeaways!.isNotEmpty) ...[
-              const SizedBox(height: 16),
-              const Text(
-                'Kluczowe wnioski:',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              ...keyTakeaways!.map((takeaway) => Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  '- $takeaway',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              )),
-            ],
+            Text(
+              explanation,
+              style: const TextStyle(fontSize: 16),
+            ),
           ],
         ),
       ),

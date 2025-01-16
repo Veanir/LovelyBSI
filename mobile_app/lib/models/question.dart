@@ -6,8 +6,7 @@ class Question {
   final List<Answer> answers;
   final int clue;
   bool isStarred;
-  final String? explanation;
-  final List<String>? keyTakeaways;
+  final String explanation;
 
   Question({
     required this.questionId,
@@ -15,8 +14,7 @@ class Question {
     required this.answers,
     required this.clue,
     this.isStarred = false,
-    this.explanation,
-    this.keyTakeaways,
+    required this.explanation,
   });
 
   factory Question.fromJson(Map<String, dynamic> json) {
@@ -28,8 +26,18 @@ class Question {
           .toList(),
       clue: json['clue'],
       isStarred: json['isStarred'] ?? false,
-      explanation: json['explanation'],
-      keyTakeaways: (json['key_takeaways'] as List?)?.map((e) => e as String).toList(),
+      explanation: json['explanation'] ?? "",
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'questionId': questionId,
+      'title': title,
+      'answers': answers.map((answer) => answer.toJson()).toList(),
+      'clue': clue,
+      'isStarred': isStarred,
+      'explanation': explanation,
+    };
   }
 }

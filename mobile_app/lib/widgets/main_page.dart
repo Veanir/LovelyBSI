@@ -303,6 +303,12 @@ class _MainPageState extends State<MainPage> {
                 );
               },
             ),
+            IconButton(
+              icon: const Icon(Icons.sync),
+              onPressed: () {
+                QuestionRepository().syncQuestions();
+              },
+            ),
         ],
       ),
       body: _allQuestions.isEmpty

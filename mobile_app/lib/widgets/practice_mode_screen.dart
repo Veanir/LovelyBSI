@@ -131,7 +131,7 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
       final questionProgress = _progress[_currentQuestion.questionId] ??
           QuestionProgress(questionId: _currentQuestion.questionId);
       
-      questionProgress.updateProgress(_selectedAnswers, correctIndices);
+      questionProgress.updateProgress(_selectedAnswers, correctIndices, isReview: widget.isReviewMode);
       _progress[_currentQuestion.questionId] = questionProgress;
       
       // Save progress
@@ -175,7 +175,6 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
       context: context,
       builder: (context) => ExplanationDialog(
         explanation: _currentQuestion.explanation,
-        keyTakeaways: _currentQuestion.keyTakeaways,
       ),
     );
   }
